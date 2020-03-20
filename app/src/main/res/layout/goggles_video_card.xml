@@ -1,22 +1,9 @@
-<layout
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tool="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-            name="GogglesVideo"
-            type="com.frangrgec.exampleui.ui.recyclerView.GogglesVideo" />
-        
-        <variable
-            name="Holder"
-            type="com.frangrgec.exampleui.ui.recyclerView.RecyclerViewAdapter.VideoHolder" />
-
-    </data>
-
-<androidx.cardview.widget.CardView
-    android:layout_width="180dp"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="180dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,23 +11,26 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/video_thumbnail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:scaleType="center"
             tool:background="@drawable/placeholder_image"/>
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/video_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="VID_001"
             android:textSize="24sp"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/video_time_text"
-            app:layout_constraintStart_toStartOf="@+id/video_time_text" />
+            app:layout_constraintBottom_toTopOf="@+id/video_duration"
+            app:layout_constraintStart_toStartOf="@+id/video_duration" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/video_time_text"
+            android:id="@+id/video_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1m 53s"
@@ -50,7 +40,7 @@
             app:layout_constraintBottom_toTopOf="@+id/dropdown_menu"
             app:layout_constraintStart_toStartOf="@+id/dropdown_menu" />
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/dropdown_menu"
             android:layout_width="24dp"
             android:layout_height="15dp"
@@ -59,8 +49,7 @@
             android:background="@drawable/dropdown_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
-
-</layout>

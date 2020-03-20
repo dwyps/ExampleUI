@@ -1,0 +1,21 @@
+
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+i
+9app/src/main/java/com/frangrgec/exampleui/MainActivity.kt,f\2\f2fd7da4850716646f0ca71e419f4dc83a8a52c6
+y
+Iapp/src/main/java/com/frangrgec/exampleui/ui/settings/SettingsFragment.kt,d\7\d7ee6a0da7bc4b7daf70c791523ed11642d4473c
+z
+Japp/src/main/java/com/frangrgec/exampleui/ui/settings/SettingsViewModel.kt,f\0\f074e465ab4d28d228298541d71baf8065b5fe24
+
+Oapp/src/main/java/com/frangrgec/exampleui/ui/phoneVideos/PhoneVideosFragment.kt,9\0\9032f7bb52ee717d2030517d774cf099ccce6548
+ƒ
+Sapp/src/main/java/com/frangrgec/exampleui/ui/gogglesVideos/GogglesVideosFragment.kt,2\6\26546da38eeec03b447f513a35434d8a75bee481
+@
+app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
+y
+Iapp/src/main/java/com/frangrgec/exampleui/ui/recyclerView/GogglesVideo.kt,9\8\98d1a61875297179d216c36ef9f9afc3cd7ef40d
+l
+<app/src/main/java/com/frangrgec/exampleui/util/DataSource.kt,3\c\3c1aea3ceff05d69f8b9f10a2e15010d9fa4d149
+€
+Papp/src/main/java/com/frangrgec/exampleui/ui/recyclerView/RecyclerViewAdapter.kt,1\a\1ac92fd6b95f6babcc297ada3f2e4565dcf2c1f5
