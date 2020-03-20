@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/bottom_nav_goggles_icon"
+        android:title="Goggles Videos" />
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/bottom_nav_videos_icon"
+        android:title="Saved Videos" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/bottom_nav_settings_icon"
+        android:title="About Goggles" />
+
+</menu>
