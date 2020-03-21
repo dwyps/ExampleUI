@@ -1,26 +1,46 @@
 package com.frangrgec.exampleui.ui.recyclerView
 
+import android.app.Activity
+import android.content.Context
 import android.renderscript.ScriptGroup
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.view.menu.ActionMenuItemView
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.frangrgec.exampleui.R
 import kotlinx.android.synthetic.main.goggles_video_card.view.*
+import kotlin.math.ceil
 
-class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RecyclerViewAdapter(
+    private val activity: Activity
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var items: List<GogglesVideo> = ArrayList()
+
+    private val _expanded = MutableLiveData<Boolean>()
+    val expanded: LiveData<Boolean> = _expanded
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return VideoViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.goggles_video_card, parent, false)
+                .inflate(R.layout.goggles_video_card, parent, false),
+            activity
         )
     }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (items[position].expanded)
+            0
+        else
+            1
+    }
+
 
     fun submitList(videoList: List<GogglesVideo>) {
         items = videoList
@@ -29,7 +49,12 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is VideoViewHolder -> {
-                holder.bind(items.get(position))
+                holder.bind(items[position])
+                holder.dropdown.setOnClickListener {
+                    items[position].expanded = (!items[position].expanded)
+                    _expanded.value = items[position].expanded
+                    notifyItemChanged(position)
+                }
             }
         }
     }
@@ -40,17 +65,61 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     class VideoViewHolder constructor(
-        itemView: View
+        itemView: View,
+        private val activity: Activity
     ) : RecyclerView.ViewHolder(itemView) {
 
+        val cardView = itemView.card_view
         val title = itemView.video_title
+        val location = itemView.video_location
         val duration = itemView.video_duration
+        val size = itemView.video_size
         val thumbnail = itemView.video_thumbnail
+        val gradient = itemView.video_gradient
+        val dropdown = itemView.dropdown_menu
+        val delete = itemView.video_delete_btn
+        val download = itemView.video_download_btn
+
+        private fun getDP(px: Int): Int {
+
+            val metrics = DisplayMetrics()
+
+            activity.windowManager.defaultDisplay.getMetrics(metrics)
+
+            return ceil((px * metrics.density).toDouble()).toInt()
+        }
 
         fun bind(video: GogglesVideo) {
 
+            dropdown.isClickable = true
+
             title.text = video.title
             duration.text = video.duration
+            location.text = video.location
+            size.text = video.size
+
+            if (video.expanded) {
+
+                gradient.visibility = View.VISIBLE
+                delete.visibility = View.VISIBLE
+                download.visibility = View.VISIBLE
+                size.visibility = View.VISIBLE
+                location.visibility = View.VISIBLE
+                dropdown.rotation = 180F
+                cardView.layoutParams.height = getDP(290)
+
+            } else {
+
+                dropdown.rotation = 360F
+                size.visibility = View.GONE
+                location.visibility = View.GONE
+                delete.visibility = View.INVISIBLE
+                download.visibility = View.INVISIBLE
+                gradient.visibility = View.INVISIBLE
+                cardView.layoutParams.height = getDP(180)
+            }
+
+
 
             val requestOptions = RequestOptions()
                 .placeholder(R.drawable.placeholder_image)
@@ -62,4 +131,6 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 .into(thumbnail)
         }
     }
+
+
 }

@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.frangrgec.exampleui.R
 import com.frangrgec.exampleui.ui.recyclerView.RecyclerViewAdapter
 import com.frangrgec.exampleui.util.DataSource
@@ -43,10 +44,28 @@ class GogglesVideosFragment : Fragment() {
 
     private fun initRecyclerView() {
 
-        videoAdapter = RecyclerViewAdapter()
+        videoAdapter = RecyclerViewAdapter(requireActivity())
+
+        val gridLayoutManager = GridLayoutManager(requireContext(), 2)
+
+        videoAdapter.expanded.observe(viewLifecycleOwner, Observer { expanded ->
+
+            gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return when (videoAdapter.getItemViewType(position)) {
+
+                        1 -> 1
+
+                        0 -> 2
+
+                        else -> -1
+                    }
+                }
+            }
+        })
 
         goggles_videos_recyclerview.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
+            layoutManager = gridLayoutManager
             adapter = videoAdapter
         }
     }

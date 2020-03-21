@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<androidx.cardview.widget.CardView android:id="@+id/card_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="180dp">
+    android:layout_height="290dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,6 +19,15 @@
             android:scaleType="center"
             tool:background="@drawable/placeholder_image"/>
 
+        <ImageView
+            android:id="@+id/video_gradient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/video_gradient"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/video_title"
             android:layout_width="wrap_content"
@@ -26,6 +35,18 @@
             android:text="VID_001"
             android:textSize="24sp"
             android:textColor="@color/white"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/video_location"
+            app:layout_constraintStart_toStartOf="@+id/video_location" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/video_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="New York"
+            android:textColor="@color/white"
+            android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/video_duration"
             app:layout_constraintStart_toStartOf="@+id/video_duration" />
 
@@ -37,18 +58,49 @@
             android:textColor="@color/white"
             android:textSize="12sp"
             android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/video_size"
+            app:layout_constraintStart_toStartOf="@+id/video_size" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/video_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="243mb"
+            android:textColor="@color/white"
+            android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/dropdown_menu"
             app:layout_constraintStart_toStartOf="@+id/dropdown_menu" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/dropdown_menu"
+            android:layout_marginBottom="20dp"
             android:layout_width="24dp"
             android:layout_height="15dp"
             android:layout_marginStart="10dp"
-            android:layout_marginBottom="8dp"
+            android:rotation="180"
             android:background="@drawable/dropdown_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/video_delete_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/delete_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/video_download_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/download_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/video_delete_btn"
+            app:layout_constraintEnd_toStartOf="@+id/video_delete_btn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
