@@ -48,21 +48,16 @@ class GogglesVideosFragment : Fragment() {
 
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
 
-        videoAdapter.expanded.observe(viewLifecycleOwner, Observer { expanded ->
+        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return when (videoAdapter.getItemViewType(position)) {
 
-            gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int): Int {
-                    return when (videoAdapter.getItemViewType(position)) {
-
-                        1 -> 1
-
-                        0 -> 2
-
-                        else -> -1
-                    }
+                    1 -> 1
+                    0 -> 2
+                    else -> -1
                 }
             }
-        })
+        }
 
         goggles_videos_recyclerview.apply {
             layoutManager = gridLayoutManager

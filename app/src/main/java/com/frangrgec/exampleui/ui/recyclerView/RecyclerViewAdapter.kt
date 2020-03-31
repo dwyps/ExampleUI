@@ -1,13 +1,10 @@
 package com.frangrgec.exampleui.ui.recyclerView
 
 import android.app.Activity
-import android.content.Context
-import android.renderscript.ScriptGroup
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
@@ -22,9 +19,6 @@ class RecyclerViewAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var items: List<GogglesVideo> = ArrayList()
-
-    private val _expanded = MutableLiveData<Boolean>()
-    val expanded: LiveData<Boolean> = _expanded
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return VideoViewHolder(
@@ -52,7 +46,10 @@ class RecyclerViewAdapter(
                 holder.bind(items[position])
                 holder.dropdown.setOnClickListener {
                     items[position].expanded = (!items[position].expanded)
-                    _expanded.value = items[position].expanded
+                    notifyItemChanged(position)
+                }
+                holder.thumbnail.setOnClickListener {
+                    items[position].expanded = (!items[position].expanded)
                     notifyItemChanged(position)
                 }
             }
@@ -92,6 +89,7 @@ class RecyclerViewAdapter(
         fun bind(video: GogglesVideo) {
 
             dropdown.isClickable = true
+            thumbnail.isClickable = true
 
             title.text = video.title
             duration.text = video.duration
@@ -106,7 +104,7 @@ class RecyclerViewAdapter(
                 size.visibility = View.VISIBLE
                 location.visibility = View.VISIBLE
                 dropdown.rotation = 180F
-                cardView.layoutParams.height = getDP(290)
+                cardView.layoutParams.height = getDP(350)
 
             } else {
 
@@ -116,7 +114,7 @@ class RecyclerViewAdapter(
                 delete.visibility = View.INVISIBLE
                 download.visibility = View.INVISIBLE
                 gradient.visibility = View.INVISIBLE
-                cardView.layoutParams.height = getDP(180)
+                cardView.layoutParams.height = getDP(200)
             }
 
 
