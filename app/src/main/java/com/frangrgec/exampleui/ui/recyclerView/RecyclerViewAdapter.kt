@@ -18,7 +18,7 @@ class RecyclerViewAdapter(
     private val activity: Activity
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var items: List<GogglesVideo> = ArrayList()
+    private var items: MutableList<GogglesVideo> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return VideoViewHolder(
@@ -36,20 +36,32 @@ class RecyclerViewAdapter(
     }
 
 
-    fun submitList(videoList: List<GogglesVideo>) {
+    fun submitList(videoList: MutableList<GogglesVideo>) {
         items = videoList
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is VideoViewHolder -> {
-                holder.bind(items[position])
-                holder.dropdown.setOnClickListener {
-                    items[position].expanded = (!items[position].expanded)
-                    notifyItemChanged(position)
+
+                if (!items[position].expanded && position % 2 != 0) {
+                    items[position + 1] =
+                        items[position].also { items[position] = items[position + 1] }
                 }
+
+                holder.bind(items[position])
+
                 holder.thumbnail.setOnClickListener {
-                    items[position].expanded = (!items[position].expanded)
+                    items[position].expanded = (!items[position].expanded).also {
+
+                        if (position % 2 != 0) {
+                            items[position] =
+                                items[position - 1].also { items[position - 1] = items[position] }
+                        }
+                    }
+
+
+
                     notifyItemChanged(position)
                 }
             }
