@@ -5,8 +5,6 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -14,14 +12,14 @@ import com.frangrgec.exampleui.R
 import kotlinx.android.synthetic.main.goggles_video_card.view.*
 import kotlin.math.ceil
 
-class RecyclerViewAdapter(
+class GoggleViewAdapter(
     private val activity: Activity
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var items: MutableList<GogglesVideo> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return VideoViewHolder(
+        return GoggleVideoViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.goggles_video_card, parent, false),
             activity
@@ -42,7 +40,7 @@ class RecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is VideoViewHolder -> {
+            is GoggleVideoViewHolder -> {
 
                 if (!items[position].expanded && position % 2 != 0) {
                     items[position + 1] =
@@ -73,7 +71,7 @@ class RecyclerViewAdapter(
     }
 
 
-    class VideoViewHolder constructor(
+    class GoggleVideoViewHolder constructor(
         itemView: View,
         private val activity: Activity
     ) : RecyclerView.ViewHolder(itemView) {

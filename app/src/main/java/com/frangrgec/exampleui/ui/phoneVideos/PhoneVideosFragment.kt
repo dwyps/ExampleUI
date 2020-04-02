@@ -1,23 +1,18 @@
 package com.frangrgec.exampleui.ui.phoneVideos
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.frangrgec.exampleui.R
-import com.frangrgec.exampleui.ui.recyclerView.RecyclerViewAdapter
+import com.frangrgec.exampleui.ui.recyclerView.GoggleViewAdapter
+import com.frangrgec.exampleui.ui.recyclerView.PhoneViewAdapter
 import com.frangrgec.exampleui.util.DataSource
-import kotlinx.android.synthetic.main.fragment_goggles_videos.*
 import kotlinx.android.synthetic.main.fragment_phone_videos.*
 
 class PhoneVideosFragment : Fragment(R.layout.fragment_phone_videos) {
 
-    private lateinit var videoAdapter: RecyclerViewAdapter
+    private lateinit var videoAdapter: PhoneViewAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,7 +29,7 @@ class PhoneVideosFragment : Fragment(R.layout.fragment_phone_videos) {
 
     private fun initRecyclerView() {
 
-        videoAdapter = RecyclerViewAdapter(requireActivity())
+        videoAdapter = PhoneViewAdapter(requireActivity())
 
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
 
